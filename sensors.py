@@ -30,8 +30,6 @@ class SensorManager:
         bh1750_address : hex
             I2C address for the BH1750 light sensor.
         """
-        # On many Linux boards, I2C bus might be /dev/i2c-1 or /dev/i2c-0.
-        # You may need to confirm which bus is exposed on the PYNQ Arduino/Grove connector.
         self.i2c = busio.I2C(board.SCL, board.SDA)
 
         # Initialize BME280
@@ -56,3 +54,4 @@ class SensorManager:
         data['light'] = self.bh1750.lux  # lux
 
         return data
+
