@@ -2,7 +2,6 @@
 actuators.py
 ------------
 Handles actuator control (Fan, Pump, Light) via GPIO.
-Ensure you load the correct PYNQ base overlay or specify the pins.
 """
 
 import pynq.lib
@@ -31,12 +30,7 @@ class Actuator:
         # Load the base overlay which provides the pins. Adjust as needed for your design.
         self.overlay = BaseOverlay(overlay_path)
         self.gpio = AxiGPIO(self.overlay.ip_dict['axi_gpio_0']).channel1
-        # ^ Example: you may need to check exactly how your overlay is configured
-        # Alternatively, if you're using PYNQ's Arduino or PMOD libraries, adapt accordingly.
 
-        # Setup pin direction
-        # This is an example; in practice, you'd use a more direct approach for the desired pin.
-        # For demonstration, let's assume we can treat `pin_number` as a bit mask or index:
         self.pin_mask = 1 << pin_number
         current_value = self.gpio.read()
         # If default_state = True, set the bit in the output
@@ -61,3 +55,4 @@ class Actuator:
             self.turn_on()
         else:
             self.turn_off()
+
